@@ -1,10 +1,9 @@
+# Create main.py
+
 import os
-import sys
 import matplotlib.pyplot as plt
 import gymnasium as gym
 import numpy as np
-from IPython import display
-import time
 
 # Import custom modules
 from register_env import register
@@ -21,7 +20,7 @@ def main():
     print("Training the AI agent...")
     model = train_agent(
         env_id='TrafficLight-v0', 
-        total_timesteps=50000,  # Reduced for demonstration
+        total_timesteps=30000,  # Reduced for demonstration in Colab
         log_dir=log_dir,
         algorithm='PPO'  # You can change to 'DQN' or 'A2C'
     )
@@ -33,7 +32,7 @@ def main():
     # Test the trained agent
     print("Testing the trained agent...")
     model_path = os.path.join(log_dir, 'final_model.zip')
-    test_agent(model_path, 'TrafficLight-v0', num_episodes=3)
+    test_agent(model_path, 'TrafficLight-v0', num_episodes=2)  # Reduced episodes for brevity
     
     print("Experiment completed!")
 
