@@ -1,9 +1,10 @@
+# Create train_traffic_agent.py
+
 import numpy as np
 import os
 import matplotlib.pyplot as plt
 from stable_baselines3 import PPO, DQN, A2C
 from stable_baselines3.common.monitor import Monitor
-from stable_baselines3.common.vec_env import DummyVecEnv, VecVideoRecorder
 from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.evaluation import evaluate_policy
 
@@ -128,16 +129,13 @@ def test_agent(model_path, env_id, num_episodes=5):
             frame = env.render()
             
             # Display the frame
-            plt.figure(figsize=(8, 8))
-            plt.imshow(frame)
-            plt.title(f"Episode {episode+1}, Step {env.current_step}")
-            plt.axis('off')
-            plt.show()
-            plt.close()
-            
-            # To make the animation slower in Colab
-            if env.current_step % 10 == 0:  # Only show every 10th step
-                pass
+            if env.current_step % 10 == 0:  # Only show every 10th step to save output space
+                plt.figure(figsize=(8, 8))
+                plt.imshow(frame)
+                plt.title(f"Episode {episode+1}, Step {env.current_step}")
+                plt.axis('off')
+                plt.show()
+                plt.close()
         
         # Record episode metrics
         all_wait_times.append(np.mean(episode_wait_times))
